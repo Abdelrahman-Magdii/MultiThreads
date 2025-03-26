@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
@@ -73,16 +78,63 @@ public class Main {
 //        System.out.println(counter.getCount());
 
 
-        Reentrant lock = new Reentrant();
+//        Reentrant lock = new Reentrant();
+//
+//        MyThread myThread = new MyThread(lock); // 5
+//        myThread.start();
+//
+//
+//        MyRunnable runnable=new MyRunnable(lock);//10
+//        Thread thread = new Thread(runnable);
+//
+//        thread.start();
 
-        MyThread myThread = new MyThread(lock); // 5
-        myThread.start();
 
 
-        MyRunnable runnable=new MyRunnable(lock);//10
-        Thread thread = new Thread(runnable);
 
-        thread.start();
+        MyRunnable runnable=new MyRunnable();
+
+        Thread thread1=new Thread(runnable);
+        Thread thread2=new Thread(runnable);
+        Thread thread3=new Thread(runnable);
+        Thread thread4=new Thread(runnable);
+
+        ArrayList<Thread>  threads=new ArrayList<>();
+        threads.add(thread1);
+        threads.add(thread2);
+        threads.add(thread3);
+        threads.add(thread4);
+
+
+        // Fixed number of threads
+        ExecutorService fixedPool = Executors.newFixedThreadPool(2);
+
+//        for(Thread thread:threads){
+//            fixedPool.submit(thread);
+//        }
+
+        // Dynamically expanding/shrinking pool
+        ExecutorService cachedPool = Executors.newCachedThreadPool();
+
+//        for(Thread thread:threads){
+//            cachedPool.submit(thread);
+//        }
+
+        // Single thread executor
+        ExecutorService singleThread = Executors.newSingleThreadExecutor();
+
+//        for(Thread thread:threads){
+//            singleThread.submit(thread);
+//        }
+
+        // Scheduled tasks
+        ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(2);
+
+        for(Thread thread:threads){
+            scheduled.submit(thread);
+        }
+
+
 
 
 

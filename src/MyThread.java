@@ -1,15 +1,15 @@
 public class MyThread extends Thread {
 
-    Reentrant lock ;
-
-   public MyThread(Reentrant lock) {
-        this.lock = lock;
-    }
-
-    @Override
-    public void run() {
-        lock.print(5);
-    }
+//    Reentrant lock ;
+//
+//   public MyThread(Reentrant lock) {
+//        this.lock = lock;
+//    }
+//
+//    @Override
+//    public void run() {
+//        lock.print(5);
+//    }
 
 
 //    Counter counter;
